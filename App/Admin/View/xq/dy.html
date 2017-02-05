@@ -1,0 +1,146 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>活动详情</title>
+<head>
+<!--关键代码部分-->
+<script language="javascript" type="text/javascript"> 
+  function doPrint() { 
+    bdhtml=window.document.body.innerHTML; 
+    sprnstr="<!--startprint-->"; 
+    eprnstr="<!--endprint-->"; 
+    prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); 
+    prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); 
+    window.document.body.innerHTML=prnhtml; 
+    window.print(); 
+  } 
+  var hkey_root,hkey_path,hkey_key 
+  hkey_root="HKEY_CURRENT_USER" 
+  hkey_path="\Software\Microsoft\Internet Explorer\PageSetup\ " 
+  function pagesetup_null(){ 
+    try{ 
+    var RegWsh=new ActiveXObject("WScript.Shell") 
+    hkey_key="header" 
+    RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"") 
+    hkey_key="footer" 
+    RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"") 
+    }catch(e){} 
+  } 
+</script> 
+<!--关键代码部分-->
+</head> 
+<body> 
+<div align=center> 
+<p>
+<!--关键代码部分-->
+<OBJECT id="WebBrowser" classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" width="0" VIEWASTEXT></OBJECT>
+<!--关键代码部分-->
+</p>
+<p> 
+
+<!--startprint-->
+
+
+<p>编号:{$a.activity_dateline|date="YmdHi",###}</p>
+<h1 align="center">四川理工学院黄岭校区学生活动申请表</h1>
+
+ <table width="950" border="1" cellspacing="0" cellpadding="0" align="center">
+   <tr>
+     <td width="7%" height="73">申请单位</td>
+     <td width="30%">{$a.activity_sqdw}</td>
+     <td width="7%">申请人</td>
+     <td width="24%">{$a.activity_sqr}</td>
+     <td width="7%">联系方式</td>
+     <td width="24%">{$a.activity_tel}</td>
+   </tr>
+   <tr>
+     <td height="67">开展活动时间</td>
+     <td>{$a.activity_kssj|date="Y-m-d H:i",###}至{$a.activity_jssj|date="Y-m-d H:i",###}</td>
+     <td>活动地点</td>
+     <td>{$a.address_name}</td>
+     <td>参加活动人数</td>
+     <td>{$a.activity_cjrs}</td>
+   </tr>
+   <tr>
+     <td height="67">活动组织者</td>
+     <td>{$a.activity_zzz}</td>
+     <td>安全负责人</td>
+     <td>{$a.activity_aqfzr}</td>
+     <td>卫生负责人</td>
+     <td>{$a.activity_wsfzr}</td>
+   </tr>
+  </table>
+  <table width="950" height="900" border="1" cellspacing="0" cellpadding="0" align="center">
+   <tr>
+     <td width="8%" rowspan="2">活动内容和方案</td>
+     <td width="42%" height="28" colspan="3" align="center">活动的详细流程</td>
+     <td width="8%" rowspan="2">活动安全方案</td>
+     <td width="42%" align="center">结合开展活动活动制定安全方案</td>
+   </tr>
+   <tr>
+     <td height="409" colspan="3">{$a.activity_nram}</td>
+     <td>{$a.activity_aqya}</td>
+   </tr>
+   <tr>
+     <td rowspan="2">辅导员(指导)老师意见</td>
+     <td height="171" colspan="3" align="left" valign="middle"> {$a.activity_fdyyj} </td>
+     <td rowspan="2">学生工作（团总支）办公室意见</td>
+     <td align="left" valign="middle">{$a.activity_tzzyj}</td>
+   </tr>
+   <tr>
+     <td height="42" colspan="3"><notempty name="a.activity_fdysp">姓名：{$a.activity_fdyname} 时间:{$a.activity_fdysj|date="Y-m-d H:i",###} </notempty> </td>
+     <td><notempty name="a.activity_tzzsp">姓名：{$a.activity_tzzname} 时间:{$a.activity_tzzsj|date="Y-m-d H:i",###} </notempty></td>
+   </tr>
+   <tr>
+     <td rowspan="2">保卫办公室意见</td>
+     <td height="211" colspan="3" align="left" valign="middle">{$a.activity_bwbyj}</td>
+     <td rowspan="2">活动分管领导意见</td>
+     <td align="left" valign="middle">{$a.activity_ldyj}</td>
+   </tr>
+   <tr>
+     <td height="45" colspan="3"><notempty name="a.activity_bwbsp">姓名：{$a.activity_bwbname} 时间:{$a.activity_bwbsj|date="Y-m-d H:i",###}</notempty></td>
+     <td><notempty name="a.activity_ldsp">姓名：{$a.activity_ldname} 时间:{$a.activity_ldsj|date="Y-m-d H:i",###}</notempty></td>
+   </tr>
+
+ </table>
+
+<br>
+ <table width="950" cellspacing="0" cellpadding="0" align="center">
+   <tr>
+     <td width="9%">申请人签字:</td>
+     <td width="21%"></td>
+     <td width="9%">经办人签字:</td>
+     <td width="21%"></td>
+     <td width="9%">盖章生效</td>
+     <td width="21%"></td>
+   </tr>
+   <tr>
+     <td width="9%">&nbsp;</td>
+     <td width="21%">&nbsp;</td>
+     <td width="9%">&nbsp;</td>
+     <td width="21%">&nbsp;</td>
+     <td width="9%">&nbsp;</td>
+     <td width="21%">&nbsp;</td>
+   </tr>
+   <tr>
+     <td width="9%">日期:</td>
+     <td width="21%"></td>
+     <td width="9%">日期:</td>
+     <td width="21%"></td>
+     <td width="9%">日期:</td>
+     <td width="21%"></td>
+   </tr>
+
+
+ </table>
+
+<!--endprint-->
+</p>
+
+<p class="noprint">
+<!--class="noprint"的作用是标示不需要打印的地方，任何一个标签的class属性都可以设置，用于去除不需要打印的地方-->
+<input onclick=javascript:doPrint() type=button value=打印 name=button_print /> 
+</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<include file="Public/head" />
+
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">完成的审批</strong></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+          <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/index/index')}">等待审批的活动</a>
+          <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/index/index/type/tgsp')}">同意开展的活动</a>
+          <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/index/index/type/bhsp')}">驳回的活动</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-compact am-table-striped am-table-hover">
+            <thead>
+              <tr>
+                <th>单位</th>
+                <th>活动时间</th>
+                <th>地点</th>
+                <th>人数</th>
+                <th>申请时间</th>
+                <th>操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="list" item="vo">
+            <tr>
+              <td>{$vo.activity_sqdw}</td>
+              <td>{$vo.activity_kssj|date="Y-m-d H:i",###}</td>
+              <td>{$vo.address_name}</td>
+              <td>{$vo.activity_cjrs}</td>
+              <td>{$vo.activity_dateline|date="Y-m-d H:i",###}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" target="_blank" href="{:U('Admin/xq/dy/activity_id/'.$vo['activity_id'])}">打印</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </foreach>
+          </tbody>
+        </table>
+        <div class="am-cf">
+          <div class="am-fr">
+            {$page}
+          </div>
+        </div>
+        <hr />
+        <p>注：.....</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+<include file="Public/footer" />
+

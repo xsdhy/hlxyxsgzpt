@@ -1,0 +1,96 @@
+<include file="Public/head" />
+
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">
+      
+      <switch name="Think.get.type">
+        <case value="bhsp">驳回的活动</case>
+        <case value="wcsp">已经完成的审批</case>  
+        <default/>正在审批的活动
+      </switch>
+
+      </strong></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+            <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/index/index')}">正在审批的活动</a>
+            <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/index/index/type/bhsp')}">驳回的活动</a>
+            <a class="am-btn am-btn-danger am-text-secondary" href="{:U('Admin/index/index/type/wcsp')}">已经完成的审批</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-compact am-table-striped am-table-hover">
+            <thead>
+              <tr>
+                <th>单位</th>
+                <th>活动时间</th>
+                <th>地点</th>
+                <th>人数</th>
+                <th>申请时间</th>
+                <th>操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="list" item="vo">
+            <tr>
+              <td>{$vo.activity_sqdw}</td>
+              <td>{$vo.activity_kssj|date="Y-m-d H:i",###}</td>
+              <td>{$vo.address_name}</td>
+              <td>{$vo.activity_cjrs}</td>
+              <td>{$vo.activity_dateline|date="Y-m-d H:i",###}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{:U('Admin/xq/index/activity_id/'.$vo['activity_id'])}">查看详情</a>
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{:U('Admin/index/del/activity_id/'.$vo['activity_id'])}">删除</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </foreach>
+          </tbody>
+        </table>
+        <div class="am-cf">
+          <div class="am-fr">
+            {$page}
+          </div>
+        </div>
+        <hr />
+        <p>注：.....</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="bh">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">请填写驳回意见
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form class="am-form" method="post" action="{:U('Admin/index/bh')}" data-am-validator>
+      <input type="hidden" name="activity_id"/>
+        <fieldset>
+          <textarea name="bhyj" required></textarea>
+          <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<include file="Public/footer" />
+

@@ -1,0 +1,148 @@
+<include file="Public/head" />
+
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">老师管理</strong> </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+          <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/admin/add')}"><i class="am-icon-plus"></i>批量新增</a>
+          <a class="am-btn am-btn-default am-text-secondary" data-am-modal="{target: '#doc-modal-1'}"><i class="am-icon-plus"></i>单个新增</a>
+          </div>
+        </div>
+      </div>
+      <div class="am-u-sm-12 am-u-md-3">
+        <div class="am-form-group">
+          <select data-am-selected="{btnSize: 'sm'}" onchange="self.location.href=options[selectedIndex].value">
+            <option value="{:U('Admin/admin/index/')}" <if condition="$Think.get.admin_type eq 0 ">selected="selected"</if>>全部</option>
+            <option value="{:U('Admin/admin/index/admin_type/1')}" <if condition="$Think.get.admin_type eq 1">selected="selected"</if>>管理员</option>
+            <option value="{:U('Admin/admin/index/admin_type/2')}" <if condition="$Think.get.admin_type eq 2">selected="selected"</if>>辅导员</option>
+            <option value="{:U('Admin/admin/index/admin_type/3')}" <if condition="$Think.get.admin_type eq 3">selected="selected"</if>>团总支</option>
+            <option value="{:U('Admin/admin/index/admin_type/4')}" <if condition="$Think.get.admin_type eq 4">selected="selected"</if>>保卫办</option>
+            <option value="{:U('Admin/admin/index/admin_type/5')}" <if condition="$Think.get.admin_type eq 5">selected="selected"</if>>分管领导</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-check"><input type="checkbox" /></th>
+                <th class="table-id">ID</th>
+                <th class="table-title">姓名</th>
+                <th class="table-date">用户名</th>
+                <th class="table-title">邮箱</th>
+                <th class="table-title">部门</th>
+                <th class="table-date">管理员类型</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="list" item="vo">
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>{$vo.admin_id}</td>
+              <td>{$vo.admin_name}</td>
+              <td>{$vo.admin_username}</td>
+              <td>{$vo.admin_email}</td>
+              <td>{$vo.admin_department}</td>
+              <td>{$vo.admin_type}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit({$vo['admin_id']})">编辑</button>
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{:U('Admin/admin/deladmin/admin_id/'.$vo['admin_id'])}">删除</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </foreach>
+          </tbody>
+        </table>
+        <div class="am-cf">
+          <div class="am-fr">
+            {$page}
+          </div>
+        </div>
+        <hr />
+        <p>注：.....</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">新增老师
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form class="am-form" method="post" action="{:U('Admin/admin/edit')}">
+      <input type="hidden" name="admin_id" value=""/>
+        <fieldset>
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">姓名</label>
+            <input type="text" name="admin_name" placeholder="输入姓名" >
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">用户名</label>
+            <input type="text" name="admin_username" placeholder="输入用户名">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">密码</label>
+            <input type="text" name="admin_password" placeholder="输入密码">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">邮箱</label>
+            <input type="text" name="admin_email" placeholder="输入电子邮件">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">部门</label>
+            <select name="admin_type" id="admin_type">
+              <option value="0">管理员</option>
+              <option value="2">辅导员</option>
+              <option value="3">团总支</option>
+              <option value="4">保卫办</option>
+              <option value="5">分管领导</option>
+            </select>
+          </div>
+
+
+          <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function edit(admin_id){
+   $.get("{:U('Admin/admin/getadmin')}", { "admin_id": admin_id },
+     function(data){
+     $("input[name='admin_id']").val(data.admin_id);
+     $("input[name='admin_name']").val(data.admin_name);
+     $("input[name='admin_username']").val(data.admin_username);
+     $("input[name='admin_email']").val(data.admin_email);
+     $("#admin_type").val(data.admin_type);
+     $('#doc-modal-1').modal('open');
+   }, "json");
+}
+</script>
+
+
+
+<include file="Public/footer" />
+

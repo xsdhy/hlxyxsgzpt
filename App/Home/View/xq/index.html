@@ -1,0 +1,129 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>学生活动申请</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.min.css">
+</head>
+<body>
+  <header data-am-widget="header" class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="{:U('Home/index/index')}" class="">
+                <i class="am-header-icon am-icon-home"></i>
+          </a>
+      </div>
+      <h1 class="am-header-title">
+          <a href="{:U('Home/index/index')}" class="">
+            黄岭学院
+          </a>
+      </h1>
+      <div class="am-header-right am-header-nav">
+          <a href="{:U('Home/user/index')}" class="">
+                <i class="am-header-icon am-icon-bars"></i>
+          </a>
+      </div>
+  </header>
+
+  <br>
+  <div>
+    <section style="text-align: center; font-size: 1em; vertical-align: middle; white-space: nowrap;">
+        <section class="wxqq-borderTopColor wxqq-borderBottomColor" style="margin: 0 1em; white-space: nowrap; height: 0;border-top: 1.5em solid #00BBEC; border-bottom: 1.5em solid #00BBEC; border-left: 1.5em solid transparent; border-right: 1.5em solid transparent;"></section>
+        <section style="margin: -2.75em 1.65em; white-space: nowrap; height: 0;border-top: 1.3em solid #ffffff; border-bottom: 1.3em solid #ffffff; border-left: 1.3em solid transparent; border-right: 1.3em solid transparent;"></section>
+        <section class="wxqq-borderTopColor wxqq-borderBottomColor" style="margin: 0.45em 2.1em; white-space: nowrap; height: 0; vertical-align: middle;border-top: 1.1em solid #00BBEC; border-bottom: 1.1em solid #00BBEC; border-left: 1.1em solid transparent; border-right: 1.1em solid transparent;">
+            <section style="padding: 0 1em; margin-top: -0.5em; font-size: 1.2em; line-height: 1em; color: white; white-space: nowrap;max-height: 1em; overflow: hidden;">
+                学生活动申请表
+            </section>
+        </section>
+    </section><br>
+    <div class="am-panel am-panel-default">
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">基本信息</h3>
+      </div>
+
+      <ul class="am-list am-list-static">
+        <li>申请单位：{$a.activity_sqdw}</li>
+        <li>申请人：{$a.activity_sqr}</li>
+        <li>联系方式：{$a.activity_tel}</li>
+        <li>活动时间：{$a.activity_kssj|date="Y-m-d H:i",###}至{$a.activity_jssj|date="Y-m-d H:i",###}</li>
+        <li>活动地点：{$a.address_name}</li>
+        <li>参加人数：{$a.activity_cjrs}</li>
+        <li>活动组织者：{$a.activity_zzz}</li>
+        <li>安全负责人：{$a.activity_aqfzr}</li>
+        <li>卫生负责人:{$a.activity_wsfzr}</li>
+      </ul>
+
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">活动内容与方案</h3>
+      </div>
+      <div class="am-panel-bd">
+        {$a.activity_nram}
+      </div>
+
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">活动安全方案</h3>
+      </div>
+      <div class="am-panel-bd">
+        {$a.activity_aqya}
+      </div>
+
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">辅导员(指导)老师意见</h3>
+      </div>
+      <div class="am-panel-bd">
+        <empty name="a.activity_fdysp">
+        正在等待辅导员老师审批
+        <else />
+        {$a.activity_fdyyj}
+        姓名：{$a.activity_fdyname} 时间:{$a.activity_fdysj|date="Y-m-d H:i",###} </empty> 
+      </div>
+
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">学生工作（团总支）办公室意见</h3>
+      </div>
+      <div class="am-panel-bd">
+        <empty name="a.activity_tzzsp">
+          <if condition="$a.activity_zt eq 1">
+          正在等待学生工作（团总支）办公室审批
+          </if>
+        <else />
+        {$a.activity_tzzyj}
+        姓名：{$a.activity_tzzname} 时间:{$a.activity_tzzsj|date="Y-m-d H:i",###} </empty>
+      </div>
+
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">保卫办公室意见</h3>
+      </div>
+      <div class="am-panel-bd">
+        <empty name="a.activity_bwbsp">
+          <if condition="$a.activity_zt eq 1">
+          正在等待保卫办公室审批
+          </if>
+        <else />
+        {$a.activity_bwbyj}
+        姓名：{$a.activity_bwbname} 时间:{$a.activity_bwbsj|date="Y-m-d H:i",###}</empty>
+      </div>
+
+      <div class="am-panel-hd">
+        <h3 class="am-panel-title">活动分管领导意见</h3>
+      </div>
+      <div class="am-panel-bd">
+        <empty name="a.activity_ldsp">
+          <if condition="$a.activity_zt eq 1">
+          正在等待分管领导审批
+          </if>
+        <else />
+        {$a.activity_ldyj}
+        姓名：{$a.activity_ldname} 时间:{$a.activity_ldsj|date="Y-m-d H:i",###}</empty>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

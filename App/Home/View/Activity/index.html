@@ -1,0 +1,196 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>学生活动申请</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/app.css">
+  <script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+  <script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.datetimepicker.css">
+  <script src="__PUBLIC__/assets/js/amazeui.datetimepicker.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/assets/js/amazeui.datetimepicker.zh-CN.js" charset="UTF-8"></script>
+</head>
+<body>
+  <header data-am-widget="header" class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="{:U('Home/index/index')}" class="">
+                <i class="am-header-icon am-icon-home"></i>
+          </a>
+      </div>
+      <h1 class="am-header-title">
+          <a href="{:U('Home/index/index')}" class="">
+            黄岭学院
+          </a>
+      </h1>
+      <div class="am-header-right am-header-nav">
+          <a href="{:U('Home/user/index')}" class="">
+                <i class="am-header-icon am-icon-bars"></i>
+          </a>
+      </div>
+  </header>
+
+  <div>
+    <form class="am-form" method="post" action="{:U('Home/activity/send')}" data-am-validator>
+      <fieldset>
+        <legend>学生活动申请</legend>
+
+        <div class="am-form-group">
+          <label>申请单位</label>
+          <input type="text" name="activity_sqdw" placeholder="申请单位" value="{$Think.session.student_class}" required>
+        </div>
+
+        <div class="am-form-group">
+          <label>申请人</label>
+          <input type="text" name="activity_sqr" placeholder="申请人" value="{$Think.session.student_name}" minlength="2" maxlength="5" required>
+        </div>
+
+        <div class="am-form-group">
+          <label>联系电话</label>
+          <input type="text" name="activity_tel" placeholder="联系电话" pattern="^\s*1\d{10}\s*$" required>
+        </div>
+
+        <div class="am-form-group" id="my-time">
+          <label>活动开始时间</label>
+          <input type="text" name="activity_kssj" id="my-start" readonly required>
+        </div>
+
+        <div class="am-form-group">
+          <label>活动结束时间</label>
+          <input type="text" name="activity_jssj" id="my-end" readonly required>
+        </div>
+
+        <div class="am-form-group">
+          <label>活动地点</label>
+          <div id="address">
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label>参加人数</label>
+          <input type="text" name="activity_cjrs" placeholder="参加人数" minlength="1" maxlength="4" pattern="^[0-9]*$" required>
+        </div>
+
+        <div class="am-form-group">
+          <label>活动组织者</label>
+          <input type="text" name="activity_zzz" placeholder="活动组织者" minlength="2" maxlength="5" required>
+        </div>
+
+        <div class="am-form-group">
+          <label>安全负责人</label>
+          <input type="text" name="activity_aqfzr" placeholder="安全负责人" minlength="2" maxlength="5" required>
+        </div>
+
+        <div class="am-form-group">
+          <label>卫生负责人</label>
+          <input type="text" name="activity_wsfzr" placeholder="卫生负责人" minlength="2" maxlength="5" required>
+        </div>
+
+        <div class="am-form-group">
+          <label>活动内容和方案</label>
+          <textarea name="activity_nram" rows="5" id="doc-ta-1" minlength="30" maxlength="700" required></textarea>
+        </div>
+
+        <div class="am-form-group">
+          <label>活动安全预案</label>
+          <textarea name="activity_aqya" rows="5" id="doc-ta-1" minlength="30" maxlength="700" required></textarea>
+        </div>
+        <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+      </fieldset>
+    </form>
+  </div>
+
+  <script>
+    var mystart;
+    var myend;
+    var myHours;
+    $(function() {
+      //获得当前时间
+      var myDate = new Date();
+      var mtime=myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+(myDate.getDate()+3)+' '+myDate.getHours()+':'+myDate.getMinutes();
+      var stime=myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+(myDate.getDate()+3);
+
+      //设置开始时间
+      var checkin = $('#my-start').datetimepicker({autoclose:'true',language:'zh-CN',initialDate:mtime,startDate:stime}).on('changeDate.datetimepicker.amui', function(event){
+          //选择开始时间后的操作
+          myHours=event.date.getUTCHours();//获取选择的小时
+          if( myHours < 7 || myHours > 21){
+            $('#my-start').val("");
+            $('#my-time').focus();
+            alert("请选择正常时间");
+          }else{
+            //获取选择的时间
+            mystart=event.date.getUTCFullYear()+'-'+(event.date.getUTCMonth()+1)+'-'+event.date.getUTCDate()+' '+event.date.getUTCHours()+':'+event.date.getUTCMinutes();
+            $('#my-end').val("");
+            $('#my-end').datetimepicker('setStartDate',mystart);
+            console.log(mystart);
+          }
+      });
+
+      var checkout = $('#my-end').datetimepicker({autoclose:'true',language:'zh-CN',format:'yyyy-mm-dd hh:00',startView:'1',minView:'1'}).on('changeDate.datetimepicker.amui', function(event){
+
+          if ($('#my-start').val()=='') {
+            $('#my-end').val("");
+            $('#my-time').focus();
+            alert("请选择开始时间");
+          }else{
+            myHours=event.date.getUTCHours();
+            if( myHours < 7 || myHours > 21)
+            {
+              $('#my-start').val("");
+              $('#my-time').focus();
+              alert("请选择正常时间");
+            }else{
+              myend=event.date.getUTCFullYear()+'-'+(event.date.getUTCMonth()+1)+'-'+event.date.getUTCDate()+' '+event.date.getUTCHours()+':'+event.date.getUTCMinutes();
+              console.log(myend);
+              address();
+            }
+          }
+      });
+
+    });
+
+
+    function addajaxhtml(data,len) {
+      console.log(data);
+      var panel ='';
+      panel+='<select name="address_id" data-am-selected>';
+      for (var i = 0; i < len; i++) {
+        panel+='<option value="'+data[i]['address_id']+'">'+data[i]['address_name']+'</option>';
+      }
+      panel+='</select>';
+      $('#address').html(panel);
+    };
+   function address(){
+    $.ajax({
+      url: '{:U('Home/Activity/address')}',
+      data:{  
+        activity_kssj:mystart,activity_jssj:myend
+      },
+      type:'post',  
+      cache:false,  
+      dataType:'json',  
+    }).then(function(data) {
+      if (data['status']=='1') {
+        if (data['len']>0) {
+            addajaxhtml(data['data'],data['len']);//调用addajaxhtml添加html内容
+        } else {
+            $('#address').html("在这个时间段没有可用地点，请重新选择");
+        }
+      }else{
+        $('#address').html("获取可用地点失败");
+      }
+    }, function() {
+      $('#address').html('请求失败，点击重试');
+    });
+   }
+  </script>
+
+</body>
+</html>

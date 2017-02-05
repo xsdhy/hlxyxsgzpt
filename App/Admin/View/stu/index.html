@@ -1,0 +1,173 @@
+<include file="Public/head" />
+
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">学生管理</strong></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+          <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/stu/add')}"><i class="am-icon-plus"></i>批量新增</a>
+          <a class="am-btn am-btn-default am-text-secondary" data-am-modal="{target: '#doc-modal-1'}"><i class="am-icon-plus"></i>单个新增</a>
+          </div>
+        </div>
+      </div>
+      <div class="am-u-sm-12 am-u-md-3">
+        <div class="am-form-group">
+          <select data-am-selected="{btnSize: 'sm'}" onchange="self.location.href=options[selectedIndex].value">
+            <option value="{:U('Admin/stu/index/')}" <if condition="$Think.get.student_xgz eq 0 ">selected="selected"</if>>全部</option>
+            <option value="{:U('Admin/stu/index/student_xgz/1')}" <if condition="$Think.get.student_xgz eq 1">selected="selected"</if>>学工一组</option>
+            <option value="{:U('Admin/stu/index/student_xgz/2')}" <if condition="$Think.get.student_xgz eq 2">selected="selected"</if>>学工二组</option>
+            <option value="{:U('Admin/stu/index/student_xgz/3')}" <if condition="$Think.get.student_xgz eq 3">selected="selected"</if>>学工三组</option>
+            <option value="{:U('Admin/stu/index/student_xgz/4')}" <if condition="$Think.get.student_xgz eq 4">selected="selected"</if>>学工四组</option>
+            <option value="{:U('Admin/stu/index/student_xgz/5')}" <if condition="$Think.get.student_xgz eq 5">selected="selected"</if>>学工五组</option>
+            <option value="{:U('Admin/stu/index/student_xgz/5')}" <if condition="$Think.get.student_xgz eq 5">selected="selected"</if>>学工六组</option>
+          </select>
+        </div>
+      </div>
+      <form class="am-form" method="post" action="{:U('Admin/stu/index')}">
+      <div class="am-u-sm-12 am-u-md-3">
+        <div class="am-input-group am-input-group-sm">
+          <input type="text" name="student_number" class="am-form-field">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-default" type="submit">搜索</button>
+          </span>
+        </div>
+      </div>
+      </form>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>学工组</th>
+                <th>辅导员</th>
+                <th>邮箱</th>
+                <th>班级</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>类型</th>
+                <th>操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="list" item="vo">
+            <tr>
+              <td>{$vo.student_id}</td>
+              <td>{$vo.student_xgz}</td>
+              <td>{$vo.student_fdy}</td>
+              <td>{$vo.student_email}</td>
+              <td>{$vo.student_class}</td>
+              <td>{$vo.student_number}</td>
+              <td>{$vo.student_name}</td>
+              <td>{$vo.student_type}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit({$vo['student_id']})">编辑</button>
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{:U('Admin/stu/delstudent/student_id/'.$vo['student_id'])}">删除</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </foreach>
+          </tbody>
+        </table>
+        <div class="am-cf">
+          <div class="am-fr">
+            {$page}
+          </div>
+        </div>
+        <hr />
+        <p>注：.....</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">修改学生资料
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form class="am-form" method="post" action="{:U('Admin/stu/edit')}">
+      <input type="hidden" name="student_id" value=""/>
+        <fieldset>
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">学工组</label>
+            <input type="text" name="student_xgz" placeholder="输入学工组">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">辅导员</label>
+            <input type="text" name="student_fdy" placeholder="输入辅导员">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">电子邮箱</label>
+            <input type="text" name="student_email" placeholder="电子邮箱">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">所属单位</label>
+            <input type="text" name="student_class" placeholder="所属单位">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">学号</label>
+            <input type="text" name="student_number" placeholder="输入学号">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">姓名</label>
+            <input type="text" name="student_name" placeholder="输入姓名">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">学生类型</label>
+            <input type="text" name="student_type" placeholder="学生类型">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">密码</label>
+            <input type="text" name="student_password" placeholder="输入密码" >
+          </div>
+
+
+
+          <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function edit(student_id){
+   $.get("{:U('stu/getstudent')}", { "student_id": student_id },
+     function(data){
+     $("input[name='student_id']").val(data.student_id);
+     $("input[name='student_xgz']").val(data.student_xgz);
+     $("input[name='student_fdy']").val(data.student_fdy);
+     $("input[name='student_email']").val(data.student_email);
+     $("input[name='student_class']").val(data.student_class);
+     $("input[name='student_number']").val(data.student_number);
+     $("input[name='student_name']").val(data.student_name);
+     $("input[name='student_type']").val(data.student_type);
+     $('#doc-modal-1').modal('open');
+   }, "json");
+}
+</script>
+
+<include file="Public/footer" />
+

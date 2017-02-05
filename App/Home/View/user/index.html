@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>学生活动申请中心</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/app.css">
+  <script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+  <script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+</head>
+<body>
+  <header data-am-widget="header" class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="{:U('Home/index/index')}" class="">
+                <i class="am-header-icon am-icon-home"></i>
+          </a>
+      </div>
+      <h1 class="am-header-title">
+          <a href="{:U('Home/index/index')}" class="">
+            黄岭学院
+          </a>
+      </h1>
+      <div class="am-header-right am-header-nav">
+          <a href="{:U('Home/user/index')}" class="">
+                <i class="am-header-icon am-icon-bars"></i>
+          </a>
+      </div>
+  </header>
+
+
+<!-- content start -->
+  <div class="admin-content">
+
+  <div data-am-widget="tabs" class="am-tabs am-tabs-default">
+      <ul class="am-tabs-nav am-cf">
+          <li class="am-active"><a href="[data-tab-panel-0]">邮箱修改</a></li>
+          <li class=""><a href="[data-tab-panel-1]">密码修改</a></li>
+      </ul>
+      <div class="am-tabs-bd">
+          <div data-tab-panel-0 class="am-tab-panel am-active">
+              <form class="am-form" method="post" action="{:U('Home/user/email')}" data-am-validator>
+                <fieldset>
+                  <div class="am-form-group">
+                    <label for="doc-ipt-email-1">邮箱</label>
+                    <input type="email" name="student_email" value="{$res.student_email}" required>
+                  </div>
+                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </fieldset>
+              </form>
+          </div>
+          <div data-tab-panel-1 class="am-tab-panel ">
+              <form class="am-form" method="post" action="{:U('Home/user/password')}" data-am-validator>
+                <fieldset>
+                  <div class="am-form-group">
+                    <label for="doc-ipt-text-1">原密码</label>
+                    <input type="text" name="password" required>
+                  </div>
+                  <div class="am-form-group">
+                    <label for="doc-vld-pwd-1">密码：</label>
+                    <input type="password" id="doc-vld-pwd-1" name="student_password" minlength="6" required/>
+                  </div>
+                  <div class="am-form-group">
+                    <label for="doc-vld-pwd-2">确认密码：</label>
+                    <input type="password" id="doc-vld-pwd-2" placeholder="请与上面输入的值一致" data-equal-to="#doc-vld-pwd-1" minlength="6" required/>
+                  </div>
+                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </fieldset>
+              </form>
+          </div>
+      </div>
+  </div>
+
+
+  </div>
+  <!-- content end -->
+
+
+
+</body>
+</html>
+
+

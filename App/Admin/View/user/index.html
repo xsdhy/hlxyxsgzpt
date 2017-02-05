@@ -1,0 +1,52 @@
+<include file="Public/head" />
+
+<!-- content start -->
+  <div class="admin-content">
+
+      <div data-am-widget="tabs" class="am-tabs am-tabs-default">
+          <ul class="am-tabs-nav am-cf">
+              <li class="am-active"><a href="[data-tab-panel-0]">邮箱修改</a></li>
+              <li class=""><a href="[data-tab-panel-1]">密码修改</a></li>
+          </ul>
+          <div class="am-tabs-bd">
+              <div data-tab-panel-0 class="am-tab-panel am-active">
+                  <form class="am-form" method="post" action="{:U('Admin/user/email')}" data-am-validator>
+                    <fieldset>
+                      <div class="am-form-group">
+                        <label for="doc-ipt-email-1">邮箱</label>
+                        <input type="email" name="admin_email" value="{$res.admin_email}" required>
+                      </div>
+                      <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                    </fieldset>
+                  </form>
+              </div>
+              <div data-tab-panel-1 class="am-tab-panel ">
+                  <form class="am-form" method="post" action="{:U('Admin/user/password')}" data-am-validator>
+                    <fieldset>
+                      <div class="am-form-group">
+                        <label for="doc-ipt-text-1">原密码</label>
+                        <input type="text" name="password" required>
+                      </div>
+                      <div class="am-form-group">
+                        <label for="doc-vld-pwd-1">密码：</label>
+                        <input type="password" id="doc-vld-pwd-1" name="admin_password" minlength="6" required/>
+                      </div>
+                      <div class="am-form-group">
+                        <label for="doc-vld-pwd-2">确认密码：</label>
+                        <input type="password" id="doc-vld-pwd-2" placeholder="请与上面输入的值一致" data-equal-to="#doc-vld-pwd-1" minlength="6" required/>
+                      </div>
+                      <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                    </fieldset>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+  </div>
+  <!-- content end -->
+
+
+
+
+<include file="Public/footer" />
+

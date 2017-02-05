@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>学生活动申请中心</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/app.css">
+  <script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+  <script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+</head>
+<body>
+  <header data-am-widget="header" class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="{:U('Home/index/index')}" class="">
+                <i class="am-header-icon am-icon-home"></i>
+          </a>
+      </div>
+      <h1 class="am-header-title">
+          <a href="{:U('Home/index/index')}" class="">
+            黄岭学院
+          </a>
+      </h1>
+      <div class="am-header-right am-header-nav">
+          <a href="{:U('Home/user/index')}" class="">
+                <i class="am-header-icon am-icon-bars"></i>
+          </a>
+      </div>
+  </header>
+
+
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">活动申请</strong> / <small>欢迎你:{$Think.session.student_name}</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+            <a class="am-btn am-btn-default am-text-secondary" href="{:U('Home/Activity/index')}"><i class="am-icon-plus"></i>新增申请</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-type">时间</th>
+                <th class="table-type">地点</th>
+                <th class="table-type">状态</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="list" item="vo">
+            <tr>
+              <td>{$vo.activity_kssj|date="m-d H:i",###}</td>
+              <td>{$vo.address_name}</td>
+              <td>
+                  <switch name="vo.activity_zt">
+                    <case value="0">申请失败</case>
+                    <case value="1">审批中</case>  
+                    <case value="2">申请通过</case>
+                    <case value="3">已撤回</case>
+                  </switch>
+              </td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{:U('Home/xq/index/activity_id/'.$vo['activity_id'])}">详情</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </foreach>
+          </tbody>
+        </table>
+          <div class="am-cf">
+          <div class="am-fr">
+            {$page}
+          </div>
+          </div>
+          <hr />
+          <p>注：.....</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+
+
+
+</body>
+</html>

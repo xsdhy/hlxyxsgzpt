@@ -1,0 +1,113 @@
+<include file="Public/head" />
+
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">地址管理</strong> </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+          <a class="am-btn am-btn-default am-text-secondary" href="{:U('Admin/address/add')}"><i class="am-icon-plus"></i>批量新增</a>
+          <a class="am-btn am-btn-default am-text-secondary" data-am-modal="{target: '#doc-modal-1'}"><i class="am-icon-plus"></i>单个新增</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-check"><input type="checkbox" /></th>
+                <th class="table-id">ID</th>
+                <th class="table-title">地址名称</th>
+                <th class="table-date">单位容量</th>
+                <th class="table-title">学生类型</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="list" item="vo">
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>{$vo.address_id}</td>
+              <td>{$vo.address_name}</td>
+              <td>{$vo.address_lastclass}</td>
+              <td>{$vo.address_stutype}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit({$vo['address_id']})">编辑</button>
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{:U('Admin/address/deladdress/address_id/'.$vo['address_id'])}">删除</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </foreach>
+          </tbody>
+        </table>
+        <div class="am-cf">
+          <div class="am-fr">
+            {$page}
+          </div>
+        </div>
+        <hr />
+        <p>注：.....</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">新增地址
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form class="am-form" method="post" action="{:U('Admin/address/edit')}" enctype="multipart/form-data">
+      <input type="hidden" name="address_id" value=""/>
+        <fieldset>
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">地址名称</label>
+            <input type="text" name="address_name" placeholder="地址名称" >
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">单位容量</label>
+            <input type="text" name="address_lastclass" placeholder="单位容量">
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-text-1">申请学生类型</label>
+            <input type="text" name="address_stutype" placeholder="申请学生类型">
+          </div>
+
+          <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function edit(address_id){
+   $.get("{:U('Admin/address/getaddress')}", { "address_id": address_id },
+     function(data){
+     $("input[name='address_id']").val(data.address_id);
+     $("input[name='address_name']").val(data.address_name);
+     $("input[name='address_lastclass']").val(data.address_lastclass);
+     $("input[name='address_stutype']").val(data.address_stutype);
+     $('#doc-modal-1').modal('open');
+   }, "json");
+}
+</script>
+
+
+
+<include file="Public/footer" />
+

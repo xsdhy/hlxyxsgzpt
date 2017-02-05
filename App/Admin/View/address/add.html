@@ -1,0 +1,28 @@
+<include file="Public/head" />
+
+<!-- content start -->
+<div class="admin-content">
+
+  <div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">地址添加</strong></div>
+  </div>
+
+  <form class="am-form" method="post" action="{:U('Admin/address/upload')}" enctype="multipart/form-data">
+    <fieldset>
+
+      <div class="control-group">
+          <label>Excel表格：</label>
+          <input type="file"  name="file"/>
+      </div>
+      <div class="control-group">
+          <input type="submit"  value="导入" />
+      </div>
+
+    </fieldset>
+  </form>
+
+
+</div>
+<!-- content end -->
+
+<include file="Public/footer" />
